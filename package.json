@@ -1,8 +1,22 @@
 {
   "name": "eth-crypto-ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "eth-crypto library with typescript",
-  "main": "index.js",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "commonjs": "./dist/index.cjs.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "rollup --config --sourcemap --validate --bundleConfigAsCjs",
