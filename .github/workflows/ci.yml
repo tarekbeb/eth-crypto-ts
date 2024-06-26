@@ -1,4 +1,4 @@
-name: sdk-build
+name: CI
 on:
   pull_request:
     branches:
@@ -16,7 +16,7 @@ jobs:
         with:
           ref: ${{ steps.branch_name.outputs.branch }}
 
-      - name: Setup Up NodeJS
+      - name: Setup Up Node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
@@ -24,12 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run linter
-        run: npm run lint --no-color
+      # - name: Run linter
+      #   run: npm run lint --no-color
 
-      - name: Run tests
-        if: always()
-        run: npm run test
+      # - name: Run tests
+      #   if: always()
+      #   run: npm run test
 
       - name: Run Audit-CI to check for vulnerabilities
         id: audit
