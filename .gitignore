@@ -1,0 +1,10 @@
+*.log
+.DS_Store
+.env
+stats.html
+node_modules
+dist
+./dist
+coverage
+**/temp
+/.vscode/*

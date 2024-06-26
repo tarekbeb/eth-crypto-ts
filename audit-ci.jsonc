@@ -1,0 +1,7 @@
+{
+  "high": true,
+  "moderate": true,
+  "low": true,
+  "report-type": "summary",
+  "allowlist": ["GHSA-78xj-cgh5-2h22"]
+}
