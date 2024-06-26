@@ -2,8 +2,7 @@ name: sdk-build
 on:
   pull_request:
     branches:
-      - develop
-      - main
+      - master
 jobs:
   build-audit-test:
     runs-on: ubuntu-latest

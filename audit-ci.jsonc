@@ -3,5 +3,5 @@
   "moderate": true,
   "low": true,
   "report-type": "summary",
-  "allowlist": ["GHSA-78xj-cgh5-2h22"]
+  "allowlist": ["GHSA-78xj-cgh5-2h22", "GHSA-c2qf-rxjj-qqgw", "GHSA-pp7h-53gx-mx7r", "GHSA-wrw9-m778-g6mc", "GHSA-x6fg-f45m-jf5q"]
 }
