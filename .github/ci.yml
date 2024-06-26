@@ -1,0 +1,38 @@
+name: sdk-build
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+jobs:
+  build-audit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch name
+        id: branch_name
+        run: echo "branch=$(echo ${GITHUB_HEAD_REF#refs/heads/})" >>$GITHUB_OUTPUT
+
+      - name: Checkout ${{ steps.branch_name.outputs.branch }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.branch_name.outputs.branch }}
+
+      - name: Setup Up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter
+        run: npm run lint --no-color
+
+      - name: Run tests
+        if: always()
+        run: npm run test
+
+      - name: Run Audit-CI to check for vulnerabilities
+        id: audit
+        if: always()
+        run: npm run audit-ci
