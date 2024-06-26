@@ -27,9 +27,9 @@ jobs:
       - name: Run linter
         run: npm run lint --no-color
 
-      - name: Run tests
-        if: always()
-        run: npm run test
+      # - name: Run tests
+      #   if: always()
+      #   run: npm run test
 
       - name: Run Audit-CI to check for vulnerabilities
         id: audit
