@@ -1,5 +1,7 @@
 # eth-crypto-ts
 
+[![npm version](https://badge.fury.io/js/eth-crypto-ts.svg)](https://badge.fury.io/js/eth-crypto-ts)
+
 This repository is an open source that aims to transform `eth-crypto` to a typescript library.
 
 It fixes a few issues with building as well as polyfilling node native packages.
