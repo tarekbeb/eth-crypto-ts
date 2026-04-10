@@ -1,23 +1,10 @@
-import { decrypt } from 'eccrypto';
-import { Encrypted } from '../types';
-import { removeLeading0x } from './utils';
-import { Cipher } from './cipher';
+import { stripHexPrefix } from './util';
+import { decrypt } from './encryption-utils';
+import { Encrypted } from './types';
 
-export function decryptWithPrivateKey(privateKey: string, encrypted: Encrypted | any) {
-  const cipher = new Cipher();
+export const decryptWithPrivateKey = (privateKey: string, encrypted: Encrypted) => {
+  // remove '0x' from privateKey
+  const twoStripped = stripHexPrefix(privateKey);
 
-  // ensuring the encrypted data is in the correct format.
-  encrypted = cipher.parse(encrypted);
-
-  // remove trailing '0x' from privateKey
-  const twoStripped = removeLeading0x(privateKey);
-
-  const encryptedBuffer = {
-    iv: Buffer.from(encrypted.iv, 'hex'),
-    ephemPublicKey: Buffer.from(encrypted.ephemPublicKey, 'hex'),
-    ciphertext: Buffer.from(encrypted.ciphertext, 'hex'),
-    mac: Buffer.from(encrypted.mac, 'hex'),
-  };
-
-  return decrypt(Buffer.from(twoStripped, 'hex'), encryptedBuffer).then((decryptedBuffer) => decryptedBuffer.toString());
-}
+  return decrypt(twoStripped, encrypted);
+};
