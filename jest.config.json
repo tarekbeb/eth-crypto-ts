@@ -14,5 +14,5 @@
   "coverageDirectory": "./coverage",
   "collectCoverage": true,
   "testTimeout": 30000,
-  "coverageReporters": ["json-summary", "text", "html"]
+  "coverageReporters": ["lcov", "json-summary", "text", "html"]
 }
