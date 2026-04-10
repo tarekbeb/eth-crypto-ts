@@ -29,7 +29,11 @@
     "audit-ci": "audit-ci --config audit-ci.jsonc",
     "release": "npm publish --access-public"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tarekbeb/eth-crypto-ts"
+  },
+  "author": "tarekbeb",
   "license": "ISC",
   "dependencies": {
     "@noble/hashes": "^1.8.0",
