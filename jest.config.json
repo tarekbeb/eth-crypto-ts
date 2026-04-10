@@ -1,0 +1,18 @@
+{
+  "verbose": true,
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "globals": {
+    "__VERSION__": "2.2.2-test"
+  },
+  "transform": {
+    "^.+\\.(t|j)s$": ["ts-jest", { "tsconfig": "<rootDir>/tsconfig.json", "diagnostics": false }]
+  },
+  "modulePathIgnorePatterns": ["build", "dist", ".ignore"],
+  "coveragePathIgnorePatterns": ["node_modules", "build", "dist", "coverage", "tests"],
+  "coverageDirectory": "./coverage",
+  "collectCoverage": true,
+  "testTimeout": 30000,
+  "coverageReporters": ["json-summary", "text", "html"]
+}

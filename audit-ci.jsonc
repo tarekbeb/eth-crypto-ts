@@ -3,5 +3,8 @@
   "moderate": true,
   "low": true,
   "report-type": "summary",
-  "allowlist": ["GHSA-78xj-cgh5-2h22", "GHSA-c2qf-rxjj-qqgw", "GHSA-pp7h-53gx-mx7r", "GHSA-wrw9-m778-g6mc", "GHSA-x6fg-f45m-jf5q"]
+  "allowlist": [
+    "GHSA-848j-6mx2-7j84", // elliptic - Low severity - Elliptic Uses a Cryptographic Primitive with a Risky Implementation
+    "GHSA-pp7h-53gx-mx7r" // bl - Moderate severity - Remote Memory Exposure in bl - this bumps the version to above 2. Deps need version 0.any to work.
+  ]
 }

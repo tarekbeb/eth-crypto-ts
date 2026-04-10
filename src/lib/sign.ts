@@ -1,24 +1,27 @@
-import { ecdsaSign as secp256k1_sign } from 'secp256k1';
-import { addLeading0x, removeLeading0x } from './utils';
+import { secp256k1 } from 'ethereum-cryptography/secp256k1.js';
+import { hmac } from '@noble/hashes/hmac';
+import { sha256 } from '@noble/hashes/sha2';
+import { hexToBytes } from 'ethereum-cryptography/utils';
+import { addLeading0x, isHexString, stripHexPrefix } from './utils';
 
 /**
  * signs the given message
- * we do not use sign from eth-lib because the pure secp256k1-version is 90% faster
  * @param  {string} privateKey
  * @param  {string} hash
  * @return {string} hexString
  */
-export function sign(privateKey: string, hash: string) {
-  hash = addLeading0x(hash);
-  if (hash.length !== 66) throw new Error('EthCrypto.sign(): Can only sign hashes, given: ' + hash);
+export const sign = (privateKey: string, hash: string) => {
+  const hashWith0x = addLeading0x(hash);
+  if (hashWith0x.length !== 66 || !isHexString(hashWith0x)) throw new Error('Can only sign hashes, given: ' + hash);
 
-  const sigObj = secp256k1_sign(
-    new Uint8Array(Buffer.from(removeLeading0x(hash), 'hex')),
-    new Uint8Array(Buffer.from(removeLeading0x(privateKey), 'hex')),
-  );
+  const sigObj = secp256k1.sign(hexToBytes(stripHexPrefix(hash)), hexToBytes(stripHexPrefix(privateKey)));
 
-  const recoveryId = sigObj.recid === 1 ? '1c' : '1b';
-
-  const newSignature = '0x' + Buffer.from(sigObj.signature).toString('hex') + recoveryId;
+  const recoveryId = sigObj.recovery === 1 ? '1c' : '1b';
+  const newSignature = '0x' + sigObj.toCompactHex() + recoveryId;
   return newSignature;
-}
+};
+
+export const hmacSha256Sign = (key: Uint8Array, msg: Uint8Array) => {
+  const result = hmac(sha256, key, msg);
+  return result;
+};
