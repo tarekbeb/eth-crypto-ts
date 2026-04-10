@@ -1,0 +1,46 @@
+name: Release Drafter
+
+on:
+  # Run on every merge to master → updates the draft release with new version
+  push:
+    branches:
+      - master
+
+  # Run on every PR event → autolabeler applies labels to open PRs so the
+  # version bump level is visible before the PR is merged
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  update-release-draft:
+    runs-on: ubuntu-latest
+    permissions:
+      # Write access is needed to create / update the draft release
+      contents: write
+      # Write access is needed for the autolabeler to apply labels to PRs
+      pull-requests: write
+    steps:
+      - name: Run Release Drafter
+        id: release-drafter
+        uses: release-drafter/release-drafter@v6
+        with:
+          config-name: configs/release-drafter.config.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Only log the resolved version on push (i.e. after a merge), not on
+      # every PR open/sync event, to keep the noise down.
+      - name: Log resolved version
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          echo "### Release Drafter output" >> $GITHUB_STEP_SUMMARY
+          echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| ----- | ----- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Next version | \`${{ steps.release-drafter.outputs.resolved_version }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tag | \`${{ steps.release-drafter.outputs.tag_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Draft URL | ${{ steps.release-drafter.outputs.html_url }} |" >> $GITHUB_STEP_SUMMARY

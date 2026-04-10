@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Use a PAT or the default token — push back to master requires contents: write
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Extract version from tag
+        id: version
+        # GITHUB_REF_NAME is the tag name, e.g. "v1.2.3" → strip the leading "v"
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Bump package.json version
+        # --no-git-tag-version: only update package.json/package-lock.json, don't create a tag
+        # --allow-same-version: safe to re-run if version already matches
+        run: npm version ${{ steps.version.outputs.VERSION }} --no-git-tag-version --allow-same-version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build:prod
+
+      - name: Verify registry signatures
+        run: npm audit signatures
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          # Only commit if there are staged changes (version was actually different)
+          git diff --staged --quiet || git commit -m "chore(release): bump version to ${{ steps.version.outputs.VERSION }} [skip ci]"
+          git push origin HEAD:master
+
+      - name: Publish to npm
+        # --provenance: attaches SLSA provenance to the package for supply-chain security
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
