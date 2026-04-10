@@ -24,14 +24,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Run linter
-      #   run: npm run lint --no-color
-
-      # - name: Run tests
-      #   if: always()
-      #   run: npm run test
-
       - name: Run Audit-CI to check for vulnerabilities
         id: audit
         if: always()
         run: npm run audit-ci
+
+      - name: Run linter
+        run: npm run lint --no-color --max-warnings=0
+
+      - name: Run tests
+        if: always()
+        run: npm run test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: tarekbeb/eth-crypto-ts

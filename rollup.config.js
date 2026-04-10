@@ -2,7 +2,7 @@
  * @type {import('rollup').RollupOptions}
  */
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json'
 
 import { defineConfig } from 'rollup';
 import builtins from 'rollup-plugin-node-builtins';
