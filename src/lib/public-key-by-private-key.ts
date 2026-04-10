@@ -1,4 +1,4 @@
-import { decompress, stripHexPrefix } from './util';
+import { decompress, stripHexPrefix } from './utils';
 import { secp256k1 } from 'ethereum-cryptography/secp256k1.js';
 import { bytesToHex } from 'ethereum-cryptography/utils';
 

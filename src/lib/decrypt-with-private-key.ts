@@ -1,4 +1,4 @@
-import { stripHexPrefix } from './util';
+import { stripHexPrefix } from './utils';
 import { decrypt } from './encryption-utils';
 import { Encrypted } from './types';
 

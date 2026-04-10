@@ -1,4 +1,4 @@
-import { publicKeyByPrivateKey } from '../publicKeyByPrivateKey';
+import { publicKeyByPrivateKey } from '../lib/public-key-by-private-key';
 
 const PRIVATE_KEY = '0xb966663733f9dacb81ccf336508bb334cca74136f6063783f737fb4c12c96c63';
 const PUBLIC_KEY =

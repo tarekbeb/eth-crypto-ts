@@ -1,4 +1,4 @@
-import { keccak256 } from '../hash';
+import { keccak256 } from '../lib/hash';
 
 describe('keccak256 function', () => {
   const message = '0x8ba1f109551bd432803012645ac136ddd64dba72';

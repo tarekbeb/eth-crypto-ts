@@ -1,4 +1,4 @@
-import { recoverPublicKey } from '../recoverPublicKey';
+import { recoverPublicKey } from '../lib/recoverPublicKey';
 
 const DATA = [
   {

@@ -1,5 +1,5 @@
 import { ecdsaRecover } from 'ethereum-cryptography/secp256k1-compat';
-import { stripHexPrefix } from './util';
+import { stripHexPrefix } from './utils';
 import { bytesToHex, hexToBytes } from 'ethereum-cryptography/utils';
 
 /**

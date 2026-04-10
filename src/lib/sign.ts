@@ -2,7 +2,7 @@ import { secp256k1 } from 'ethereum-cryptography/secp256k1.js';
 import { hmac } from '@noble/hashes/hmac';
 import { sha256 } from '@noble/hashes/sha2';
 import { hexToBytes } from 'ethereum-cryptography/utils';
-import { addLeading0x, isHexString, stripHexPrefix } from './util';
+import { addLeading0x, isHexString, stripHexPrefix } from './utils';
 
 /**
  * signs the given message

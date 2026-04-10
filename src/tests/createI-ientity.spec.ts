@@ -1,6 +1,5 @@
 import { getRandomBytesSync } from 'ethereum-cryptography/random';
-import { createIdentity, createPrivateKey, DEFAULT_ENTROPY_BYTES } from '../createIdentity';
-import { testUser } from '../../tests/data/user.factory';
+import { createIdentity, createPrivateKey, DEFAULT_ENTROPY_BYTES } from '../lib/create-identity';
 
 describe('createPrivateKey tests', () => {
   it('should create a private key without entropy', () => {
@@ -32,8 +31,14 @@ describe('createPrivateKey tests', () => {
 });
 
 describe('createIdentity tests', () => {
-  it('should accept a PRF from passkey as entropy', () => {
-    const entropy = testUser.credentials.prfValue;
+  it('should throw an error if entropy has the wrong length', () => {
+    const entropy = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    expect((() => createIdentity(new Uint8Array(entropy)))).toThrow(
+      `entropy must be a Uint8Array of at least 32 bytes`,
+    );
+  });
+  it('should accept a valid Uint8Array as entropy', () => {
+    const entropy = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
     const identity = createIdentity(new Uint8Array(entropy));
     expect(identity).toHaveProperty('privateKey');
     expect(identity).toHaveProperty('publicKey');

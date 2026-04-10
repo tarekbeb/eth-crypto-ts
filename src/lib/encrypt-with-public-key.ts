@@ -1,4 +1,4 @@
-import { decompress } from './util';
+import { decompress } from './utils';
 import { encrypt } from './encryption-utils';
 import { EncryptionOptions } from './types';
 

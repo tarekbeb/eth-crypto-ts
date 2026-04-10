@@ -1,6 +1,6 @@
 import { bytesToHex, hexToBytes } from 'ethereum-cryptography/utils.js';
 import { keccak256 as _keccak256 } from 'ethereum-cryptography/keccak.js';
-import { addLeading0x, utf8ToBytes } from './util';
+import { addLeading0x, utf8ToBytes } from './utils';
 
 const solidityPackedKeccak256 = (value: string) => {
   const bytes = utf8ToBytes(value);

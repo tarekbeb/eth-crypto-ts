@@ -1,8 +1,8 @@
 import { secp256k1 } from 'ethereum-cryptography/secp256k1';
-import { sign, hmacSha256Sign } from '../sign';
 import { bytesToHex, hexToBytes } from 'ethereum-cryptography/utils';
-import { addLeading0x } from '../util';
-import { keccak256 } from '../hash';
+import { sign, hmacSha256Sign } from '../lib/sign';
+import { addLeading0x } from '../lib/utils';
+import { keccak256 } from '../lib/hash';
 
 const PRIVATE_KEY = '0xb966663733f9dacb81ccf336508bb334cca74136f6063783f737fb4c12c96c63';
 const HASH = '0x2a6cbba5f734a92891f3548343db1ad63a5aa63b14d17b8af526d5f978f8770e';

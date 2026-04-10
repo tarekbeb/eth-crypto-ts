@@ -5,7 +5,7 @@ import { hexToBytes, bytesToHex, bytesToUtf8 } from 'ethereum-cryptography/utils
 import { encrypt as aesEncrypt, decrypt as aesDecrypt } from 'ethereum-cryptography/aes.js';
 import { Encrypted, EncryptionOptions } from './types';
 import { hmacSha256Sign } from './sign';
-import { concatUint8Arrays, utf8ToBytes } from './util';
+import { concatUint8Arrays, utf8ToBytes } from './utils';
 
 /**
  *  See https://github.com/bitchan/eccrypto for the original implementation that eth-crypto used, it's ancient and not maintained.

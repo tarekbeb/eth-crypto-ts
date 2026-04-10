@@ -1,5 +1,5 @@
-import { encryptWithPublicKey } from '../encryptWithPublicKey';
-import { decryptWithPrivateKey } from '../decryptWithPrivateKey';
+import { encryptWithPublicKey } from '../lib/encrypt-with-public-key';
+import { decryptWithPrivateKey } from '../lib/decrypt-with-private-key';
 
 const TEST_DATA = [
   {

@@ -1,4 +1,4 @@
-import { isHexPrefixed, stripHexPrefix, isHexString, addLeading0x, utf8ToBytes } from '../util';
+import { isHexPrefixed, stripHexPrefix, isHexString, addLeading0x, utf8ToBytes } from '../lib/utils';
 import * as bip39 from 'ethereum-cryptography/bip39/index.js';
 import { wordlist } from 'ethereum-cryptography/bip39/wordlists/english.js';
 import { bytesToHex, utf8ToBytes as utf8ToBytesEc } from 'ethereum-cryptography/utils';
