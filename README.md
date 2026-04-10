@@ -1,6 +1,8 @@
 # eth-crypto-ts
 
 [![npm version](https://badge.fury.io/js/eth-crypto-ts.svg)](https://badge.fury.io/js/eth-crypto-ts)
+[![codecov](https://codecov.io/gh/tarekbeb/eth-crypto-ts/graph/badge.svg?token=9OSGIO3AHQ)](https://codecov.io/gh/tarekbeb/eth-crypto-ts)
+
 
 A **lightweight, TypeScript-first** cryptography library for Ethereum. Built as an improvement over the original `eth-crypto`, with a curated subset of functions and **zero Node.js polyfill requirements**.
 
