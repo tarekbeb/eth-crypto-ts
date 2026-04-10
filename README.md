@@ -102,7 +102,6 @@ const h = hash.keccak256('0x...');
 ## Notes
 
 - This library is a **curated subset** of the original `eth-crypto`, focusing on the most commonly needed functions
-- Not yet tested extensively in production environments — use at your own risk
 - Ideal for applications where bundle size and environment compatibility matter
 
 ## License
