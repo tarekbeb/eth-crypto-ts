@@ -32,10 +32,7 @@
   "license": "ISC",
   "dependencies": {
     "@noble/hashes": "^1.8.0",
-    "eccrypto": "^1.1.6",
     "ethereum-cryptography": "^3.2.0",
-    "ethereumjs-util": "^7.1.5",
-    "ethers": "^6.13.1",
     "secp256k1": "^5.0.0"
   },
   "devDependencies": {
@@ -58,5 +55,11 @@
     "rollup-plugin-polyfill-node": "^0.13.0",
     "ts-jest": "^29.1.0",
     "typescript": "^5.5.2"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.0.3",
+    "@tootallnate/once": "^3.0.1",
+    "semver": "^5.7.2",
+    "bl": "^0.9.5"
   }
 }
