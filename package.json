@@ -1,6 +1,6 @@
 {
   "name": "eth-crypto-ts",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "eth-crypto library with typescript",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
