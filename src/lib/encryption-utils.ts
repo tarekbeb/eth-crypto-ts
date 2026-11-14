@@ -12,12 +12,12 @@ import { concatUint8Arrays, utf8ToBytes } from './utils';
  */
 
 /**
- * Encrypts a message using the recipient's public key.
- * @param {string} publicKeyTo - The recipient's public key.
+ * Encrypts a message with the recipient's public key (ECIES).
+ * @param {string} publicKeyTo - Recipient key as hex, `04`-prefixed, no `0x`.
  * @param {string} msg - The message to encrypt.
+ * @param {EncryptionOptions} [options] - `ephemPrivateKey` fixes the ephemeral key (tests only).
  * @returns {Encrypted} The encrypted message.
  */
-
 export const encrypt = (publicKeyTo: string, msg: string, options?: EncryptionOptions): Encrypted => {
   const ephemPrivateKey = options?.ephemPrivateKey ? hexToBytes(options.ephemPrivateKey) : randomBytes(32);
   const iv = randomBytes(16);
@@ -44,9 +44,10 @@ export const encrypt = (publicKeyTo: string, msg: string, options?: EncryptionOp
 
 /**
  * Decrypts an encrypted message using the recipient's private key.
- * @param {string} privateKey - The recipient's private key.
+ * @param {string} privateKey - Recipient private key, hex WITHOUT `0x`.
  * @param {Encrypted} opts - The encrypted message.
  * @returns {string} The decrypted message.
+ * @throws "Invalid MAC" on ECDH failure or MAC mismatch.
  */
 export const decrypt = (privateKey: string, opts: Encrypted) => {
   let sharedSecret: Uint8Array;

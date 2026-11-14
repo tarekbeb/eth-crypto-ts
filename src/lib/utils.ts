@@ -51,6 +51,11 @@ export const addLeading0x = (str: string) => {
   else return str;
 };
 
+/**
+ * Drops the leading `04` from an uncompressed public key.
+ * Does not expand compressed (02/03) keys.
+ * @param {string} startsWith02Or03 - Hex public key, no `0x`.
+ */
 export const decompress = (startsWith02Or03: string) => {
   const testByteArray = hexToBytes(startsWith02Or03);
   let startsWith04 = startsWith02Or03;

@@ -3,10 +3,11 @@ import { stripHexPrefix } from './utils';
 import { bytesToHex, hexToBytes } from 'ethereum-cryptography/utils';
 
 /**
- * returns the publicKey for the privateKey with which the messageHash was signed
- * @param  {string} signature
- * @param  {string} hash
- * @return {string} publicKey
+ * Recovers the signer's public key from a signature made by `sign`.
+ * Any `v` other than `1c` is treated as recovery id 0.
+ * @param  {string} signature - `0x`-optional hex, r||s||v.
+ * @param  {string} hash - The 32-byte hash that was signed.
+ * @return {string} Uncompressed public key hex without `0x` or `04` (128 chars).
  */
 export const recoverPublicKey = (signature: string, hash: string) => {
   const noHex = stripHexPrefix(signature);

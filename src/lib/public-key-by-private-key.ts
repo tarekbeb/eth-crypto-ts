@@ -3,10 +3,9 @@ import { secp256k1 } from 'ethereum-cryptography/secp256k1.js';
 import { bytesToHex } from 'ethereum-cryptography/utils';
 
 /**
- * Generate publicKey from the privateKey.
- * This creates the uncompressed publicKey,
- * where 04 has stripped from left
- * @returns {string}
+ * Derives the uncompressed public key from a private key.
+ * @param {string} privateKey - Hex, with or without `0x`.
+ * @returns {string} 128 hex chars: no `0x`, no `04` prefix.
  */
 
 export const publicKeyByPrivateKey = (privateKey: string) => {
