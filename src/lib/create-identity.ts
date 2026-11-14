@@ -8,9 +8,10 @@ export const DEFAULT_ENTROPY_BYTES = 32;
 export const MINIMUM_SHANNON_ENTROPY = 4;
 
 /**
- * creates a new private key
- * @param { Uint8Array } entropy - optional entropy to create the private key
- * @returns a new private key
+ * Creates a new private key: keccak256 of the entropy, or of nested random bytes if none given.
+ * @param { Uint8Array } entropy - optional; >= 32 bytes, must pass diversity and Shannon checks
+ * @returns `0x`-prefixed 32-byte hex private key
+ * @throws if entropy is too short, repetitive, or low-entropy
  */
 export const createPrivateKey = (entropy?: Uint8Array) => {
   if (entropy) {
@@ -50,9 +51,9 @@ export const createPrivateKey = (entropy?: Uint8Array) => {
 };
 
 /**
- * creates a new identity
- * @param { Uint8Array } entropy - optional entropy to create the private key
- * @returns a new pair of private and public key
+ * Creates a new identity.
+ * @param { Uint8Array } entropy - optional entropy, see `createPrivateKey`
+ * @returns `{ privateKey: '0x…', publicKey }` where publicKey is 128 hex chars, no `0x`
  */
 export const createIdentity = (entropy?: Uint8Array) => {
   const privateKey = createPrivateKey(entropy);
